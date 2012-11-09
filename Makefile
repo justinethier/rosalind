@@ -1,8 +1,8 @@
-all: count_nt rna
+all: dna rna
 
-count_nt: count_nt.c
-	gcc count_nt.c -o count_nt
+dna: dna.c
+	gcc dna.c -o dna
 rna: rna.c
 	gcc rna.c -o rna
 clean:
-	rm -f *.o a.out count_nt rna
+	rm -f *.o a.out dna rna
