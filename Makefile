@@ -7,6 +7,6 @@ rna: rna.c
 revc: revc.c
 	gcc revc.c -o revc
 gc: gc.c
-	gcc gc.c -o gc
+	gcc gc.c -o gc -g
 clean:
 	rm -f *.o a.out dna rna revc gc
