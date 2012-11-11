@@ -8,22 +8,31 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * Calculage the GC-content of a DNA strand
- */
-double gc_content(char *data){
-    int i, total = 0, gc = 0;
+// /**
+//  * Calculate the GC-content of a DNA strand
+//  */
+// double gc_content(char *data){
+//     int i, total = 0, gc = 0;
+// 
+//     while(data[i]){
+//         total++;
+// 
+//         if (data[i] == 'G' || 
+//             data[i] == 'C'){
+//             gc++;
+//         }
+//     }
+// 
+//     return gc / ((double) total);
+// }
 
-    while(data[i]){
-        total++;
+void set_max(char *max_id, double *max_gc, char *id, double gc, double total){
+    double gc_content = 100 * gc / ((double) total);
 
-        if (data[i] == 'G' || 
-            data[i] == 'C'){
-            gc++;
-        }
+    if (*max_gc < gc_content) {
+        *max_gc = gc_content;
+        strncpy(max_id, id, 80);
     }
-
-    return gc / ((double) total);
 }
 
 int main(int argc, char **argv){
@@ -45,18 +54,17 @@ int main(int argc, char **argv){
                 strncpy(max_id, line + 1, 80);
             } else {
                 // Prev record finished, see if it is new max
-                if (max_gc < (100 * gc / ((double) total))) {
-                    max_gc = (100 * gc / ((double) total));
-                    strncpy(max_id, id, 80);
-                }
+                set_max(max_id, &max_gc, id, gc, total);
             }
 
             // Initialize data
             strncpy(id, line + 1, 80);
             total = gc = 0;
         } else {
+            // Accumulate gc counts, and total number of bases
             i = 0;
             while (line[i] && i < read){
+                // getline leaves whitespace, so skip it
                 if (line[i] != ' ' &&
                     line[i] != '\n' &&
                     line[i] != '\r'){
@@ -69,16 +77,13 @@ int main(int argc, char **argv){
         }
     }
 
-    if (max_gc < (100 * gc / ((double) total))) {
-        max_gc = (100 * gc / ((double) total));
-        strncpy(max_id, id, 80);
-    }
+    set_max(max_id, &max_gc, id, gc, total);
 
     fclose(fp);
     free(line);
 
     printf("%s", max_id);
-    printf("%f\n", max_gc);
+    printf("%f%%\n", max_gc);
 
     return 0;
 }
