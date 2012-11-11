@@ -27,52 +27,58 @@ double gc_content(char *data){
 }
 
 int main(int argc, char **argv){
-    char sample[] = "gc.fas";
-    char *data = sample;
-    char *line, id[80];
+    char sample[] = "gc.fas", *data = sample, *line = NULL, id[80], max_id[80];
     int total = 0, gc = 0, i;
+    double max_gc = 0.0;
     FILE *fp;
     size_t len;
     ssize_t read;
 
-    id[0] = '\0';
+    max_id[0] = '\0';
     if (argc > 1) data = argv[1];
 
     fp = fopen(data, "r");
     while ((read = getline(&line, &len, fp)) != -1) {
         if (line[0] == '>'){
-            /*
-            if (id[0]){
-                printf("%s\n", id);
-                // TODO: format # of decimal places
-                // TODO: need to do this after the while
-                printf("%lf\n", gc / ((double) total));
+            if (!max_id[0]){
+                // First one, initialize to first id
+                strncpy(max_id, line + 1, 80);
+            } else {
+                // Prev record finished, see if it is new max
+                if (max_gc < (100 * gc / ((double) total))) {
+                    max_gc = (100 * gc / ((double) total));
+                    strncpy(max_id, id, 80);
+                }
             }
-            */
 
-            //strncpy(id, line + 1, 1024);
-            printf("%s\n", line);
+            // Initialize data
+            strncpy(id, line + 1, 80);
+            total = gc = 0;
         } else {
-            /*
             i = 0;
-            while (line[i]){
-                total++;
-                if (line[i] == 'G' || line[i] == 'C') gc++;
+            while (line[i] && i < read){
+                if (line[i] != ' ' &&
+                    line[i] != '\n' &&
+                    line[i] != '\r'){
+                    total++;
+                    if (line[i] == 'G' || line[i] == 'C') gc++;
+                }
+
                 i++;
             }
-            */
         }
+    }
 
-    // read info line '>', parse out the number
-    // read line(s) containing DNA strand
-    // upon next '>' or EOF, compute gc and maintain max
-    //   may make sense to keep track of current count/total as we go
-    //   that way we can use stack memory instead of worrying about
-    //   heap allocation for the whole string (or can just say screw it
-    //   since site limits strings to 1000 chars)
+    if (max_gc < (100 * gc / ((double) total))) {
+        max_gc = (100 * gc / ((double) total));
+        strncpy(max_id, id, 80);
     }
 
     fclose(fp);
     free(line);
+
+    printf("%s", max_id);
+    printf("%f\n", max_gc);
+
     return 0;
 }
