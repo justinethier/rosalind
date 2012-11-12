@@ -26,6 +26,9 @@
 //     return gc / ((double) total);
 // }
 
+/**
+ * Internal function - Keep track of the entry with the current max GC-content
+ */
 void set_max(char *max_id, double *max_gc, char *id, double gc, double total){
     double gc_content = 100 * gc / ((double) total);
 
@@ -35,8 +38,13 @@ void set_max(char *max_id, double *max_gc, char *id, double gc, double total){
     }
 }
 
-int main(int argc, char **argv){
-    char sample[] = "gc.fas", *data = sample, *line = NULL, id[80], max_id[80];
+/**
+ * Read data from the FASTA file and
+ * keep track of the record with the
+ * highest GC-content.
+ */
+void read_data(char *data){
+    char *line = NULL, id[80], max_id[80];
     int total = 0, gc = 0, i;
     double max_gc = 0.0;
     FILE *fp;
@@ -44,13 +52,13 @@ int main(int argc, char **argv){
     ssize_t read;
 
     max_id[0] = '\0';
-    if (argc > 1) data = argv[1];
 
     fp = fopen(data, "r");
     while ((read = getline(&line, &len, fp)) != -1) {
         if (line[0] == '>'){
+            // New entry found
             if (!max_id[0]){
-                // First one, initialize to first id
+                // First one is an edge case, initialize to first id
                 strncpy(max_id, line + 1, 80);
             } else {
                 // Prev record finished, see if it is new max
@@ -61,7 +69,7 @@ int main(int argc, char **argv){
             strncpy(id, line + 1, 80);
             total = gc = 0;
         } else {
-            // Accumulate gc counts, and total number of bases
+            // Data - Accumulate gc counts, and total number of bases
             i = 0;
             while (line[i] && i < read){
                 // getline leaves whitespace, so skip it
@@ -77,6 +85,7 @@ int main(int argc, char **argv){
         }
     }
 
+    // Check if the last record is the max
     set_max(max_id, &max_gc, id, gc, total);
 
     fclose(fp);
@@ -84,6 +93,14 @@ int main(int argc, char **argv){
 
     printf("%s", max_id);
     printf("%f%%\n", max_gc);
+}
+
+int main(int argc, char **argv){
+    char sample[] = "gc.fas", *data = sample;
+    if (argc > 1) 
+        data = argv[1];
+    read_data(data);
 
     return 0;
 }
+
