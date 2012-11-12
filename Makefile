@@ -1,4 +1,4 @@
-all: dna rna revc gc hamm
+all: dna rna revc gc hamm perm
 
 dna: dna.c
 	gcc dna.c -o dna
@@ -10,5 +10,7 @@ gc: gc.c
 	gcc gc.c -o gc -g
 hamm: hamm.c
 	gcc hamm.c -o hamm 
+perm: perm.c
+	gcc perm.c -o perm 
 clean:
-	rm -f *.o a.out dna rna revc gc hamm
+	rm -f *.o a.out dna rna revc gc hamm perm
