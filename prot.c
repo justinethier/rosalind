@@ -9,94 +9,119 @@
 #include <stdlib.h>
 #include <string.h>
 
-/*
-UUU F   
-UUC F   
-UUA L   
-UUG L   
-UCU S   
-UCC S   
-UCA S   
-UCG S   
-UAU Y   
-UAC Y   
-UAA Stop
-UAG Stop
-UGU C   
-UGC C   
-UGA Stop
-UGG W   
-UUU F   
-CUC L
-CUA L
-CUG L
-CCU P
-CCC P
-CCA P
-CCG P
-CAU H
-CAC H
-CAA Q
-CAG Q
-CGU R
-CGC R
-CGA R
-CGG R
-AUU I
-AUC I
-AUA I
-AUG M
-ACU T
-ACC T
-ACA T
-ACG T
-AAU N
-AAC N
-AAA K
-AAG K
-AGU S
-AGC S
-AGA R
-AGG R
-GUU V
-GUC V
-GUA V
-GUG V
-GCU A
-GCC A
-GCA A
-GCG A
-GAU D
-GAC D
-GAA E
-GAG E
-GGU G
-GGC G
-GGA G
-GGG G 
-*/
-
 /**
  * Encode the given codon (a nucleobase string of 3 chars) into an amino acid
  */
 char encode_codon(char *codon)
 {
     if (strncmp(codon, "GGG", 3) == 0) return 'G';
+    if (strncmp(codon, "UUU", 3) == 0) return 'F';
+    if (strncmp(codon, "UUC", 3) == 0) return 'F';
+    if (strncmp(codon, "UUA", 3) == 0) return 'L';
+    if (strncmp(codon, "UUG", 3) == 0) return 'L';
+    if (strncmp(codon, "UCU", 3) == 0) return 'S';
+    if (strncmp(codon, "UCC", 3) == 0) return 'S';
+    if (strncmp(codon, "UCA", 3) == 0) return 'S';
+    if (strncmp(codon, "UCG", 3) == 0) return 'S';
+    if (strncmp(codon, "UAU", 3) == 0) return 'Y';
+    if (strncmp(codon, "UAC", 3) == 0) return 'Y';
+    if (strncmp(codon, "UAA", 3) == 0) return '\0'; // Stop
+    if (strncmp(codon, "UAG", 3) == 0) return '\0'; // Stop
+    if (strncmp(codon, "UGU", 3) == 0) return 'C';
+    if (strncmp(codon, "UGC", 3) == 0) return 'C';
+    if (strncmp(codon, "UGA", 3) == 0) return '\0'; // Stop
+    if (strncmp(codon, "UGG", 3) == 0) return 'W';
+    if (strncmp(codon, "UUU", 3) == 0) return 'F';
+    if (strncmp(codon, "CUC", 3) == 0) return 'L';
+    if (strncmp(codon, "CUA", 3) == 0) return 'L';
+    if (strncmp(codon, "CUG", 3) == 0) return 'L';
+    if (strncmp(codon, "CCU", 3) == 0) return 'P';
+    if (strncmp(codon, "CCC", 3) == 0) return 'P';
+    if (strncmp(codon, "CCA", 3) == 0) return 'P';
+    if (strncmp(codon, "CCG", 3) == 0) return 'P';
+    if (strncmp(codon, "CAU", 3) == 0) return 'H';
+    if (strncmp(codon, "CAC", 3) == 0) return 'H';
+    if (strncmp(codon, "CAA", 3) == 0) return 'Q';
+    if (strncmp(codon, "CAG", 3) == 0) return 'Q';
+    if (strncmp(codon, "CGU", 3) == 0) return 'R';
+    if (strncmp(codon, "CGC", 3) == 0) return 'R';
+    if (strncmp(codon, "CGA", 3) == 0) return 'R';
+    if (strncmp(codon, "CGG", 3) == 0) return 'R';
+    if (strncmp(codon, "AUU", 3) == 0) return 'I';
+    if (strncmp(codon, "AUC", 3) == 0) return 'I';
+    if (strncmp(codon, "AUA", 3) == 0) return 'I';
+    if (strncmp(codon, "AUG", 3) == 0) return 'M';
+    if (strncmp(codon, "ACU", 3) == 0) return 'T';
+    if (strncmp(codon, "ACC", 3) == 0) return 'T';
+    if (strncmp(codon, "ACA", 3) == 0) return 'T';
+    if (strncmp(codon, "ACG", 3) == 0) return 'T';
+    if (strncmp(codon, "AAU", 3) == 0) return 'N';
+    if (strncmp(codon, "AAC", 3) == 0) return 'N';
+    if (strncmp(codon, "AAA", 3) == 0) return 'K';
+    if (strncmp(codon, "AAG", 3) == 0) return 'K';
+    if (strncmp(codon, "AGU", 3) == 0) return 'S';
+    if (strncmp(codon, "AGC", 3) == 0) return 'S';
+    if (strncmp(codon, "AGA", 3) == 0) return 'R';
+    if (strncmp(codon, "AGG", 3) == 0) return 'R';
+    if (strncmp(codon, "GUU", 3) == 0) return 'V';
+    if (strncmp(codon, "GUC", 3) == 0) return 'V';
+    if (strncmp(codon, "GUA", 3) == 0) return 'V';
+    if (strncmp(codon, "GUG", 3) == 0) return 'V';
+    if (strncmp(codon, "GCU", 3) == 0) return 'A';
+    if (strncmp(codon, "GCC", 3) == 0) return 'A';
+    if (strncmp(codon, "GCA", 3) == 0) return 'A';
+    if (strncmp(codon, "GCG", 3) == 0) return 'A';
+    if (strncmp(codon, "GAU", 3) == 0) return 'D';
+    if (strncmp(codon, "GAC", 3) == 0) return 'D';
+    if (strncmp(codon, "GAA", 3) == 0) return 'E';
+    if (strncmp(codon, "GAG", 3) == 0) return 'E';
+    if (strncmp(codon, "GGU", 3) == 0) return 'G';
+    if (strncmp(codon, "GGC", 3) == 0) return 'G';
+    if (strncmp(codon, "GGA", 3) == 0) return 'G';
+    if (strncmp(codon, "GGG", 3) == 0) return 'G';
 
     return -1;
 }
 
-char *parse_codons()
-{}
+/**
+ * Parse the given RNA string and encode it to a protein string.
+ * This function allocates and returns a new string.
+ */
+char *parse_codons(char *s)
+{
+    int j = 0, len = strlen(s);
+    char *i = s, *result = (char *)malloc(sizeof(char) * len);
+
+    assert( len % 3 == 0);
+
+    while (i) {
+        result[j] = encode_codon(i);
+
+        // Quit if a stop char was encountered
+        if (!result[j])
+            break;
+
+        i += 3;
+        j++;
+    }
+
+    result[j] = '\0';
+
+    return result;
+}
 
 int main(int argc, char **argv)
 {
-    char sample[] = "TODO";
+    char sample[] = "AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA";
     char *data = sample;
 
     if (argc > 1){ 
         data = argv[1];
     }
+
+    char *enc = parse_codons(data);
+    printf("%s\n", enc);
+    free(enc);
 
     return 0;
 }
