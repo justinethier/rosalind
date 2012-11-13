@@ -14,7 +14,6 @@
  */
 char encode_codon(char *codon)
 {
-    if (strncmp(codon, "GGG", 3) == 0) return 'G';
     if (strncmp(codon, "UUU", 3) == 0) return 'F';
     if (strncmp(codon, "UUC", 3) == 0) return 'F';
     if (strncmp(codon, "UUA", 3) == 0) return 'L';
@@ -31,7 +30,7 @@ char encode_codon(char *codon)
     if (strncmp(codon, "UGC", 3) == 0) return 'C';
     if (strncmp(codon, "UGA", 3) == 0) return '\0'; // Stop
     if (strncmp(codon, "UGG", 3) == 0) return 'W';
-    if (strncmp(codon, "UUU", 3) == 0) return 'F';
+    if (strncmp(codon, "CUU", 3) == 0) return 'L';
     if (strncmp(codon, "CUC", 3) == 0) return 'L';
     if (strncmp(codon, "CUA", 3) == 0) return 'L';
     if (strncmp(codon, "CUG", 3) == 0) return 'L';
@@ -80,6 +79,9 @@ char encode_codon(char *codon)
     if (strncmp(codon, "GGA", 3) == 0) return 'G';
     if (strncmp(codon, "GGG", 3) == 0) return 'G';
 
+    printf("ERROR: Unexpected codon %c%c%c\n", codon[0], codon[1], codon[2]);
+    assert(1);
+
     return -1;
 }
 
@@ -98,7 +100,7 @@ char *parse_codons(char *s)
         result[j] = encode_codon(i);
 
         // Quit if a stop char was encountered
-        if (!result[j])
+        if (result[j] <= 0)
             break;
 
         i += 3;
