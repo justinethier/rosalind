@@ -15,12 +15,16 @@ int main(int argc, char **argv){
     char *ps = s, *pt = t;
 
     if (argc > 2){ 
-        s = argv[1];
-        t = argv[2];
+        ps = argv[1];
+        pt = argv[2];
     }
 
-    //dist = hamm_dist(data1, data2);
-    //printf("%d\n", dist);
+    char *pos, *tmp = ps;
+    while(pos = strstr(tmp, pt)){
+        printf("%d ", pos - ps + 1);
+        tmp = pos + 1;
+    }
+    printf("\n");
 
     return 0;
 }
