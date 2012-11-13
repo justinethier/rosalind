@@ -94,7 +94,7 @@ char *parse_codons(char *s)
 
     assert( len % 3 == 0);
 
-    while (i) {
+    while (i && j * 3 < len) {
         result[j] = encode_codon(i);
 
         // Quit if a stop char was encountered
