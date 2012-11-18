@@ -10,6 +10,7 @@
 #include <string.h>
 #include "rna_lib.h"
 #include "prot_lib.h"
+#include "util_lib.h"
 
 int main(int argc, char **argv)
 {
@@ -20,6 +21,8 @@ int main(int argc, char **argv)
         data = argv[1];
     }
 
+    //reverse(data); TODO?
+    //printf("%s\n", data);
     transcribe(data);
 
     int i, j, len = strlen(data);
