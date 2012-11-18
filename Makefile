@@ -12,8 +12,8 @@ hamm: hamm.c
 	gcc hamm.c -o hamm 
 perm: perm.c
 	gcc perm.c -o perm 
-prot: prot.c
-	gcc prot.c -o prot 
+prot: prot.c prot_lib.c prot_lib.h
+	gcc prot.c prot_lib.c -o prot 
 subs: subs.c
 	gcc subs.c -o subs 
 prob: prob.c
