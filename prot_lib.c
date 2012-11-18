@@ -5,6 +5,13 @@
 #include "prot_lib.h"
 
 /**
+ * Determine if given codon is the start codon
+ */
+int start_codon(char *codon){
+    return (strncmp(codon, "AUG", 3) == 0);
+}
+
+/**
  * Encode the given codon (a nucleobase string of 3 chars) into an amino acid
  */
 char encode_codon(char *codon)
