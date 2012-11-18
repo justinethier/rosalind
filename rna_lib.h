@@ -1,0 +1,2 @@
+
+void transcribe(char *dna);

@@ -2,8 +2,8 @@ all: dna rna revc gc hamm perm prot subs prob
 
 dna: dna.c
 	gcc dna.c -o dna
-rna: rna.c
-	gcc rna.c -o rna
+rna: rna.c rna_lib.c rna_lib.h
+	gcc rna.c rna_lib.c -o rna
 revc: revc.c
 	gcc revc.c -o revc
 gc: gc.c
