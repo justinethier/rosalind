@@ -102,14 +102,16 @@ char *parse_codons(char *s)
         result[j] = encode_codon(i);
 
         // Quit if a stop char was encountered
-        if (result[j] <= 0)
-            break;
+        if (result[j] <= 0){
+            result[j] = '\0';
+            return result;
+        }
 
         i += 3;
         j++;
     }
 
-    result[j] = '\0';
-
-    return result;
+    // No STOP codon was found
+    free(result);
+    return NULL;
 }

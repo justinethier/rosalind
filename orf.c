@@ -25,14 +25,15 @@ int main(int argc, char **argv)
     int i = 0;
     while(data[i]){
         if (start_codon(data + i)){
-            printf("start found\n");
+            char *enc = parse_codons(data + i);
+            if (enc){
+                printf("%s\n", enc);
+                free(enc);
+            }
         }
 
-        i++;
+        i += 3;
     }
-//    char *enc = parse_codons(data);
-//    printf("%s\n", enc);
-//    free(enc);
 
     return 0;
 }
