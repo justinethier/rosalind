@@ -6,6 +6,7 @@
 //
 #include <stdio.h>
 #include <string.h>
+#include "util_lib.h"
 
 char dna_complement(char dna){
     if (dna == 'A') dna = 'T';
@@ -14,20 +15,6 @@ char dna_complement(char dna){
     else if (dna == 'G') dna = 'C';
 
     return dna;
-}
-
-/**
- * Reverse a string, from K & R
- */   
-void reverse(char s[])
-{
-    int c, i, j;
-
-    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
-        c = s[i];
-        s[i] = s[j];
-        s[j] = c;
-    }
 }
 
 int main(int argc, char **argv){

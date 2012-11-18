@@ -4,8 +4,8 @@ dna: dna.c
 	gcc dna.c -o dna
 rna: rna.c rna_lib.c rna_lib.h
 	gcc rna.c rna_lib.c -o rna
-revc: revc.c
-	gcc revc.c -o revc
+revc: revc.c util_lib.c util_lib.h
+	gcc revc.c util_lib.c -o revc
 gc: gc.c
 	gcc gc.c -o gc -g
 hamm: hamm.c

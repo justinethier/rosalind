@@ -96,8 +96,6 @@ char *parse_codons(char *s)
     int j = 0, len = strlen(s);
     char *i = s, *result = (char *)malloc(sizeof(char) * len);
 
-    assert( len % 3 == 0);
-
     while (i && j * 3 < len) {
         result[j] = encode_codon(i);
 

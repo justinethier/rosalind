@@ -22,17 +22,21 @@ int main(int argc, char **argv)
 
     transcribe(data);
 
-    int i = 0;
-    while(data[i]){
-        if (start_codon(data + i)){
-            char *enc = parse_codons(data + i);
-            if (enc){
-                printf("%s\n", enc);
-                free(enc);
-            }
-        }
+    int i, j, len = strlen(data);
 
-        i += 3;
+    for (j = 0; j < 3; j++){
+        i = j;
+        while(i < len){
+            if (start_codon(data + i)){
+                char *enc = parse_codons(data + i);
+                if (enc){
+                    printf("%s\n", enc);
+                    free(enc);
+                }
+            }
+
+            i += 3;
+        }
     }
 
     return 0;
