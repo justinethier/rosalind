@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "dna_lib.h"
 #include "rna_lib.h"
 #include "prot_lib.h"
-#include "util_lib.h"
 
 int main(int argc, char **argv)
 {
