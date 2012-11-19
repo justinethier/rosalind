@@ -9,8 +9,8 @@
 char dna_complement(char dna);
 
 /**
- * Take a given DNA string and replace
- * it with it's reverse complement.
+ * Allocate a new dna string that is the
+ * reverse complement of the given DNA string
  */
 char *dna_reverse_complement(char *dna);
 

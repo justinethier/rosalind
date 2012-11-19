@@ -8,7 +8,7 @@ int main(int argc, char **argv){
     char *data = sample;
 
     if (argc > 1) data = argv[1];
-    transcribe(data);
+    rna_transcribe(data);
     printf("%s\n", data);
 
     return 0;

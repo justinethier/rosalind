@@ -12,19 +12,11 @@
 #include "rna_lib.h"
 #include "prot_lib.h"
 
-int main(int argc, char **argv)
-{
-    char sample[] = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG";
-    char *data = sample;
-
-    if (argc > 1){ 
-        data = argv[1];
-    }
-
-    //reverse(data); TODO?
-    //printf("%s\n", data);
-    transcribe(data);
-
+/**
+ * Find all open reading frames (ORF) 
+ * for the given DNA string.
+ */
+void find_orf(char *data){
     int i, j, len = strlen(data);
 
     for (j = 0; j < 3; j++){
@@ -41,7 +33,27 @@ int main(int argc, char **argv)
             i += 3;
         }
     }
+}
 
+int main(int argc, char **argv)
+{
+    char sample[] = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG";
+    char *data = sample;
+
+    if (argc > 1){ 
+        data = argv[1];
+    }
+
+    char *comp = dna_reverse_complement(data);
+
+    // Convert from DNA to RNA
+    rna_transcribe(data);
+    rna_transcribe(comp);
+
+    find_orf(data);
+    find_orf(comp);
+
+    free(comp);
     return 0;
 }
 

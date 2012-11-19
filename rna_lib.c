@@ -6,7 +6,7 @@
  *
  * This function modifies the given string.
  */
-void transcribe(char *dna){
+void rna_transcribe(char *dna){
     int i = 0;
     while (dna[i]) {
         if (dna[i] == 'T') 

@@ -29,9 +29,9 @@ subs: subs.c
 	gcc subs.c -o subs 
 prob: prob.c
 	gcc prob.c -o prob 
-orf: orf.c rna_lib prot_lib util_lib
+orf: orf.c dna_lib rna_lib prot_lib util_lib
 	gcc -c orf.c -o orf.o
-	gcc orf.o rna_lib.o prot_lib.o util_lib.o -o orf 
+	gcc orf.o dna_lib.o rna_lib.o prot_lib.o util_lib.o -o orf 
 
 clean:
 	rm -f *.o a.out dna rna revc gc hamm perm prot subs prob orf
