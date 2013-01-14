@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dna_lib.h"
-#include "rna_lib.h"
-#include "prot_lib.h"
+#include "lib/dna_lib.h"
+#include "lib/rna_lib.h"
+#include "lib/prot_lib.h"
 
 /**
  * Find all open reading frames (ORF) 

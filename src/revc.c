@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "dna_lib.h"
-#include "util_lib.h"
+#include "lib/dna_lib.h"
+#include "lib/util_lib.h"
 
 int main(int argc, char **argv){
     int i = 0;

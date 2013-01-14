@@ -1,37 +1,58 @@
-all: util_lib dna_lib rna_lib prot_lib dna rna revc gc hamm perm prot subs prob orf
+# 
+# Justin Ethier
+#
+# Makefile for my solutions to the Rosalind project:
+# http://rosalind.info
+#
+# Copyright 2012
+#
+CC=gcc
+ODIR=build
+SRC=src
+LIBSRC=src/lib
 
-util_lib: util_lib.c util_lib.h
-	gcc -c util_lib.c -o util_lib.o
-dna_lib: dna_lib.c dna_lib.h util_lib
-	gcc -c dna_lib.c -o dna_lib.o
-rna_lib: rna_lib.c rna_lib.h
-	gcc -c rna_lib.c -o rna_lib.o
-prot_lib: prot_lib.c prot_lib.h
-	gcc -c prot_lib.c -o prot_lib.o
+_OBJ = util_lib.o dna_lib.o rna_lib.o prot_lib.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-dna: dna.c
-	gcc dna.c -o dna
-rna: rna.c rna_lib.c rna_lib.h
-	gcc rna.c rna_lib.c -o rna
-revc: revc.c dna_lib util_lib
-	gcc -c revc.c -o revc.o
-	gcc revc.o dna_lib.o util_lib.o -o revc
-gc: gc.c
-	gcc gc.c -o gc -g
-hamm: hamm.c
-	gcc hamm.c -o hamm 
-perm: perm.c
-	gcc perm.c -o perm 
-prot: prot.c prot_lib
-	gcc -c prot.c -o prot.o
-	gcc prot.o prot_lib.o -o prot 
-subs: subs.c
-	gcc subs.c -o subs 
-prob: prob.c
-	gcc prob.c -o prob 
-orf: orf.c dna_lib rna_lib prot_lib util_lib
-	gcc -c orf.c -o orf.o
-	gcc orf.o dna_lib.o rna_lib.o prot_lib.o util_lib.o -o orf 
+_EXE = dna rna revc gc hamm perm prot subs prob orf
+EXE = $(patsubst %,$(ODIR)/%,$(_EXE))
+
+$(ODIR)/%.o: $(LIBSRC)/%.c
+	mkdir -p $(ODIR)
+	$(CC) -c $< -o $@
+
+all: $(OBJ) $(EXE)
+
+# TODO: trying to make below less complex
+#$(EXE): $(SRC)/%.c $(OBJ)
+#	$(CC) $< -o $@
+
+$(ODIR)/dna: $(SRC)/dna.c
+	mkdir -p $(ODIR)
+	$(CC) src/dna.c -o $(ODIR)/dna
+$(ODIR)/rna: $(SRC)/rna.c $(OBJ)
+	$(CC) src/rna.c $(ODIR)/rna_lib.o -o $(ODIR)/rna
+$(ODIR)/revc: $(SRC)/revc.c $(OBJ)
+	$(CC) -c $(SRC)/revc.c -o $(ODIR)/revc.o
+	$(CC) $(ODIR)/revc.o $(ODIR)/dna_lib.o $(ODIR)/util_lib.o -o $(ODIR)/revc
+$(ODIR)/gc: $(SRC)/gc.c
+	$(CC) $(SRC)/gc.c -o $(ODIR)/gc -g
+$(ODIR)/hamm: $(SRC)/hamm.c
+	$(CC) $(SRC)/hamm.c -o $(ODIR)/hamm 
+$(ODIR)/perm: $(SRC)/perm.c
+	$(CC) $(SRC)/perm.c -o $(ODIR)/perm 
+$(ODIR)/prot: $(SRC)/prot.c $(OBJ)
+	$(CC) -c $(SRC)/prot.c -o $(ODIR)/prot.o
+	$(CC) $(ODIR)/prot.o $(ODIR)/prot_lib.o -o $(ODIR)/prot 
+$(ODIR)/subs: $(SRC)/subs.c
+	$(CC) $(SRC)/subs.c -o $(ODIR)/subs 
+$(ODIR)/prob: $(SRC)/prob.c
+	$(CC) $(SRC)/prob.c -o $(ODIR)/prob 
+$(ODIR)/orf: $(SRC)/orf.c $(OBJ)
+	$(CC) -c $(SRC)/orf.c -o $(ODIR)/orf.o
+	$(CC) $(ODIR)/orf.o $(ODIR)/dna_lib.o $(ODIR)/rna_lib.o $(ODIR)/prot_lib.o $(ODIR)/util_lib.o -o $(ODIR)/orf 
+
+.PHONY: clean
 
 clean:
-	rm -f *.o a.out dna rna revc gc hamm perm prot subs prob orf
+	rm -rf $(ODIR)

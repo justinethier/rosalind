@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "rna_lib.h"
+#include "lib/rna_lib.h"
 
 int main(int argc, char **argv){
     char sample[] = "GATGGAACTTGACTACGTAAATT";

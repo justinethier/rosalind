@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "prot_lib.h"
+#include "lib/prot_lib.h"
 
 int main(int argc, char **argv)
 {
