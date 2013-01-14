@@ -55,8 +55,8 @@ $(ODIR)/revp: $(SRC)/revp.c $(OBJ)
 	$(CC) -c $(SRC)/revp.c -o $(ODIR)/revp.o
 	$(CC) $(ODIR)/revp.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/revp 
 $(ODIR)/cons: $(SRC)/cons.c $(OBJ)
-	$(CC) -c $(SRC)/cons.c -o $(ODIR)/cons.o
-	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons 
+	$(CC) -c $(SRC)/cons.c -o $(ODIR)/cons.o -g
+	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons -g
 
 tcons: $(ODIR)/cons
 	$(ODIR)/cons ATCCAGCT GGGCAACT ATGGATCT AAGCAACC TTGGAACT ATGCCATT ATGGCACT
