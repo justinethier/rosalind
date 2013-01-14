@@ -14,4 +14,9 @@ char dna_complement(char dna);
  */
 char *dna_reverse_complement(char *dna);
 
+/**
+ * Check if a reverse-complement portion of a DNA string
+ * is equal to the same part of the DNA string.
+ */
+int dna_is_reverse_palindrome(char *dna, int pos, int len);
 #endif
