@@ -9,17 +9,28 @@
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * Map from a DNA strand to a 0-3 index
+ */
 int dna2idx(char dna){
     if (dna == 'A') return 0;
     if (dna == 'C') return 1;
     if (dna == 'G') return 2;
     return 3;
 }
+
+/**
+ * Map from a 0-3 index back to a DNA strand
+ */
 char idx2dna(int idx){
     char map[4] = {'A', 'C', 'G', 'T'};
     return map[idx];
 }
 
+/**
+ * Compute consensus string given a profile matrix,
+ * and return that newly-allocated cons string.
+ */
 char *createConsensus(int **pProfile, int len){
     char *pCons = (char *) malloc(sizeof(char) * (len + 1));
     int l, n, maxIdx, maxVal;
@@ -73,8 +84,9 @@ int main(int argc, char **argv){
         free(pCons);
         free(pData);
         for (n = 0; n < 4; n++){
+            printf("%c: ", idx2dna(n));
             for (l = 0; l < len; l++){
-                printf("%d", pProfile[n][l]);
+                printf("%d ", pProfile[n][l]);
             }
             printf("\n");
 
