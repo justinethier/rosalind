@@ -11,7 +11,7 @@ ODIR=build
 SRC=src
 LIBSRC=src/lib
 
-_OBJ = util_lib.o dna_lib.o rna_lib.o prot_lib.o
+_OBJ = util_lib.o fasta_lib.o dna_lib.o rna_lib.o prot_lib.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _EXE = dna rna revc gc hamm perm prot subs prob orf revp cons grph
@@ -59,7 +59,7 @@ $(ODIR)/cons: $(SRC)/cons.c $(OBJ)
 	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons -g
 $(ODIR)/grph: $(SRC)/grph.c $(OBJ)
 	$(CC) -c $(SRC)/grph.c -o $(ODIR)/grph.o -g
-	$(CC) $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph -g
+	$(CC) ../linked-list/build/linked-list.o $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph -g
 
 tcons: $(ODIR)/cons
 	$(ODIR)/cons ATCCAGCT GGGCAACT ATGGATCT AAGCAACC TTGGAACT ATGCCATT ATGGCACT

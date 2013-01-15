@@ -1,14 +1,11 @@
 // Justin Ethier - Rosalind
 // 2012
 //
-// Solution for Rosalind problem
-// http://rosalind.info/problems/grph/
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lib/util_lib.h"
-#include "../../linked-list/linked-list.h"
+#include "fasta_lib.h"
+#include "../../../linked-list/linked-list.h"
 
 // Dynamic strcat
 // Utility function from
@@ -24,11 +21,6 @@ char *dstrcat(char *buffer, char *addition)
     strcat(buffer, addition);
     return buffer;
 }
-
-struct fasta {
-    char *label;
-    char *seq;
-};
 
 void fasta_print(void *node){
     struct fasta *data = (struct fasta *)node;
@@ -46,8 +38,7 @@ void fasta_dealloc(void *node){
 }
 
 /**
- * TODO: develop a generic way to read FASTA data,
- and move to util lib
+ * A generic way to read FASTA data
  */
 struct node *read_data(char *filename){
     struct node *result = list();
@@ -101,14 +92,5 @@ struct node *read_data(char *filename){
     fclose(fp);
     free(line);
     return result;
-}
-
-int main(int argc, char **argv){
-    char sample[] = "data/grph.fas", *data = sample;
-    if (argc > 1) 
-        data = argv[1];
-    read_data(data);
-
-    return 0;
 }
 
