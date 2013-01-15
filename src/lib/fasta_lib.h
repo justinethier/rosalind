@@ -21,6 +21,6 @@ void fasta_dealloc(void *node);
 /**
  * A generic way to read FASTA data
  */
-struct node *read_data(char *filename);
+struct node *fasta_read_data(char *filename);
 
 #endif

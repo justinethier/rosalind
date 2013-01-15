@@ -59,7 +59,7 @@ $(ODIR)/cons: $(SRC)/cons.c $(OBJ)
 	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons -g
 $(ODIR)/grph: $(SRC)/grph.c $(OBJ)
 	$(CC) -c $(SRC)/grph.c -o $(ODIR)/grph.o -g
-	$(CC) ../linked-list/build/linked-list.o $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph -g
+	$(CC) ../linked-list/build/linked-list.o $(ODIR)/fasta_lib.o $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph -g
 
 tcons: $(ODIR)/cons
 	$(ODIR)/cons ATCCAGCT GGGCAACT ATGGATCT AAGCAACC TTGGAACT ATGCCATT ATGGCACT
