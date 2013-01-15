@@ -14,7 +14,7 @@ LIBSRC=src/lib
 _OBJ = util_lib.o dna_lib.o rna_lib.o prot_lib.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-_EXE = dna rna revc gc hamm perm prot subs prob orf revp cons
+_EXE = dna rna revc gc hamm perm prot subs prob orf revp cons grph
 EXE = $(patsubst %,$(ODIR)/%,$(_EXE))
 
 $(ODIR)/%.o: $(LIBSRC)/%.c
@@ -57,6 +57,9 @@ $(ODIR)/revp: $(SRC)/revp.c $(OBJ)
 $(ODIR)/cons: $(SRC)/cons.c $(OBJ)
 	$(CC) -c $(SRC)/cons.c -o $(ODIR)/cons.o -g
 	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons -g
+$(ODIR)/grph: $(SRC)/grph.c $(OBJ)
+	$(CC) -c $(SRC)/grph.c -o $(ODIR)/grph.o -g
+	$(CC) $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph -g
 
 tcons: $(ODIR)/cons
 	$(ODIR)/cons ATCCAGCT GGGCAACT ATGGATCT AAGCAACC TTGGAACT ATGCCATT ATGGCACT
