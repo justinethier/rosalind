@@ -11,6 +11,16 @@
 #include "lib/fasta_lib.h"
 #include "../../linked-list/linked-list.h"
 
+int o3_cmp(char *a, char *b)
+{
+    int blen = strlen(b) - 2; // -2 is temporary for \n
+
+printf("%c%c%c - %c%c%c\n", a[0], a[1], a[2], b[blen-2], b[blen-1], b[blen]);
+    return a[0] == b[blen - 2] &&
+           a[1] == b[blen - 1] &&
+           a[2] == b[blen - 0];
+}
+
 int main(int argc, char **argv)
 {
     char sample[] = "data/grph.fas", *file = sample;
@@ -26,8 +36,10 @@ int main(int argc, char **argv)
         n = fdata;
         do {
             struct fasta *nf = list_value(n);
-            if (mf && nf && strcmp(mf->label, nf->label) == 0){
-                printf("%s", nf->label);
+            if (mf && nf && 
+                o3_cmp(mf->seq, nf->seq) &&
+                strcmp(mf->label, nf->label) != 0){
+                printf("[%s] [%s]", mf->label, nf->label);
             }
             n = list_rest(n);
         } while (n);
