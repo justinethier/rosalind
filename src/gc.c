@@ -96,7 +96,7 @@ void read_data(char *data){
 }
 
 int main(int argc, char **argv){
-    char sample[] = "gc.fas", *data = sample;
+    char sample[] = "data/gc.fas", *data = sample;
     if (argc > 1) 
         data = argv[1];
     read_data(data);
