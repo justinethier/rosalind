@@ -13,12 +13,10 @@
 
 int o3_cmp(char *a, char *b)
 {
-    int blen = strlen(b) - 2; // -2 is temporary for \n
-
-printf("%c%c%c - %c%c%c\n", a[0], a[1], a[2], b[blen-2], b[blen-1], b[blen]);
-    return a[0] == b[blen - 2] &&
-           a[1] == b[blen - 1] &&
-           a[2] == b[blen - 0];
+    int blen = strlen(b);
+    return a[0] == b[blen - 3] &&
+           a[1] == b[blen - 2] &&
+           a[2] == b[blen - 1];
 }
 
 int main(int argc, char **argv)
@@ -29,7 +27,6 @@ int main(int argc, char **argv)
     struct node *fdata = fasta_read_data(file);
     struct node *m, *n;
 
-    printf("processing file data\n");
     m = fdata;
     while (m){
         struct fasta *mf = list_value(m);
@@ -39,7 +36,7 @@ int main(int argc, char **argv)
             if (mf && nf && 
                 o3_cmp(mf->seq, nf->seq) &&
                 strcmp(mf->label, nf->label) != 0){
-                printf("[%s] [%s]", mf->label, nf->label);
+                printf("%s %s\n", nf->label, mf->label);
             }
             n = list_rest(n);
         } while (n);
