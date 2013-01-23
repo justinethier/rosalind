@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib/util_lib.h"
-#include "../../linked-list/linked-list.h"
+#include "linked-list.h"
 
 int find_substrings(char *s1, char *s2)
 {
@@ -30,8 +30,7 @@ int find_substrings(char *s1, char *s2)
             }
 
             if (s1[i] == s2[j]){
-                buffer[b++] = s1[i];
-                i++;
+                buffer[b++] = s1[i++];
             } else {
                 // No match, reset everything
                 if (b > 0){
@@ -39,7 +38,7 @@ int find_substrings(char *s1, char *s2)
                     printf("[2] %s\n", buffer);
                     b = 0;
                 }
-                i = tmp;
+            //    i = tmp;
             }
 
         }

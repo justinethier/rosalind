@@ -9,7 +9,7 @@
 #include <string.h>
 #include "lib/util_lib.h"
 #include "lib/fasta_lib.h"
-#include "../../linked-list/linked-list.h"
+#include "linked-list.h"
 
 int o3_cmp(char *a, char *b)
 {

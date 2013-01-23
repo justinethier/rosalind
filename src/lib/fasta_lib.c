@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fasta_lib.h"
-#include "../../../linked-list/linked-list.h"
+#include "linked-list.h"
 
 /**
  * Dynamic strcat
