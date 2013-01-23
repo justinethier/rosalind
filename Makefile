@@ -1,5 +1,3 @@
-TODO: update to use installed copy of libllist.so instead of linked-list.o
-
 # 
 # Justin Ethier
 #
@@ -7,6 +5,10 @@ TODO: update to use installed copy of libllist.so instead of linked-list.o
 # http://rosalind.info
 #
 # Copyright 2012
+#
+# Dependencies:
+#  - Requires an installed copy of libllist.so from
+#    https://github.com/justinethier/linked-list
 #
 CC=gcc
 CFLAGS=-g
@@ -62,10 +64,10 @@ $(ODIR)/cons: $(SRC)/cons.c $(OBJ)
 	$(CC) $(ODIR)/cons.o $(ODIR)/util_lib.o $(ODIR)/dna_lib.o -o $(ODIR)/cons  $(CFLAGS)
 $(ODIR)/grph: $(SRC)/grph.c $(OBJ)
 	$(CC) -c $(SRC)/grph.c -o $(ODIR)/grph.o  $(CFLAGS)
-	$(CC) ../linked-list/build/linked-list.o $(ODIR)/fasta_lib.o $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph  $(CFLAGS)
+	$(CC) $(ODIR)/fasta_lib.o $(ODIR)/grph.o $(ODIR)/util_lib.o -o $(ODIR)/grph  $(CFLAGS) -lllist
 $(ODIR)/lcs: $(SRC)/lcs.c $(OBJ)
 	$(CC) -c $(SRC)/lcs.c -o $(ODIR)/lcs.o  $(CFLAGS)
-	$(CC) ../linked-list/build/linked-list.o $(ODIR)/fasta_lib.o $(ODIR)/lcs.o $(ODIR)/util_lib.o -o $(ODIR)/lcs  $(CFLAGS)
+	$(CC) $(ODIR)/fasta_lib.o $(ODIR)/lcs.o $(ODIR)/util_lib.o -o $(ODIR)/lcs  $(CFLAGS) -lllist
 
 # Specifically test the cons program
 tcons: $(ODIR)/cons
@@ -74,7 +76,7 @@ tcons: $(ODIR)/cons
 # Unit test suite (still TBD)
 test: $(OBJ) $(EXE) $(SRC)/tests/test_lib.c
 	$(CC) -c $(SRC)/tests/test_lib.c -o $(ODIR)/test_lib.o  $(CFLAGS)
-	$(CC) ../linked-list/build/linked-list.o $(ODIR)/fasta_lib.o $(ODIR)/util_lib.o $(ODIR)/test_lib.o -o $(ODIR)/test_lib  $(CFLAGS)
+	$(CC) $(ODIR)/fasta_lib.o $(ODIR)/util_lib.o $(ODIR)/test_lib.o -o $(ODIR)/test_lib  $(CFLAGS) -lllist
 	$(ODIR)/test_lib
 
 .PHONY: clean
