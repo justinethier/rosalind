@@ -1,3 +1,5 @@
+TODO: update to use installed copy of libllist.so instead of linked-list.o
+
 # 
 # Justin Ethier
 #
